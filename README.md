@@ -1,14 +1,13 @@
+Django projects that use a custom user model, and install an app that includes a model with a `models.ForeignKey(settings.AUTH_USER_MODEL)` and does not use migrations, will fail to syncdb on Django 1.8
 ### django == 1.7
 ``` shell
-$ ./manage.py migrate                                                                                                      [12:13:57]
+ ./manage.py migrate                                                      [12:27:54]
 Operations to perform:
-  Synchronize unmigrated apps: notifications
+  Synchronize unmigrated apps: refsuser
   Apply all migrations: admin, myusers, contenttypes, auth, sessions
 Synchronizing apps without migrations:
   Creating tables...
-    Creating table notifications_noticetype
-    Creating table notifications_noticesetting
-    Creating table notifications_noticequeuebatch
+    Creating table refsuser_brokenmodel
   Installing custom SQL...
   Installing indexes...
 Running migrations:
@@ -21,21 +20,13 @@ Running migrations:
 
 ### django == 1.8
 ``` shell
-./manage.py migrate                                                                                                      [12:15:02]
-/Users/jesse/python/testapp/lib/python2.7/site-packages/pinax/notifications/compat.py:17: RemovedInDjango19Warning: django.contrib.contenttypes.generic is deprecated and will be removed in Django 1.9. Its contents have been moved to the fields, forms, and admin submodules of django.contrib.contenttypes.
-  from django.contrib.contenttypes.generic import GenericForeignKey
-
-/Users/jesse/python/testapp/lib/python2.7/site-packages/django/contrib/sites/models.py:78: RemovedInDjango19Warning: Model class django.contrib.sites.models.Site doesn't declare an explicit app_label and either isn't in an application in INSTALLED_APPS or else was imported before its application was loaded. This will no longer be supported in Django 1.9.
-  class Site(models.Model):
-
+$ ./manage.py migrate                                                      [12:25:52]
 Operations to perform:
-  Synchronize unmigrated apps: staticfiles, notifications, messages
+  Synchronize unmigrated apps: staticfiles, messages, refsuser
   Apply all migrations: admin, myusers, contenttypes, auth, sessions
 Synchronizing apps without migrations:
   Creating tables...
-    Creating table notifications_noticetype
-    Creating table notifications_noticesetting
-    Creating table notifications_noticequeuebatch
+    Creating table refsuser_brokenmodel
     Running deferred SQL...
 Traceback (most recent call last):
   File "./manage.py", line 10, in <module>
