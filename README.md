@@ -1,7 +1,10 @@
 Django projects that use a custom user model, and install an app that includes a model with a `models.ForeignKey(settings.AUTH_USER_MODEL)` and does not use migrations, will fail to syncdb on Django 1.8
+
+Works properly with SQLite, fails with Postgres.
+
 ### django == 1.7
 ``` shell
- ./manage.py migrate                                                      [12:27:54]
+ ./manage.py migrate
 Operations to perform:
   Synchronize unmigrated apps: refsuser
   Apply all migrations: admin, myusers, contenttypes, auth, sessions
@@ -20,7 +23,7 @@ Running migrations:
 
 ### django == 1.8
 ``` shell
-$ ./manage.py migrate                                                      [12:25:52]
+$ ./manage.py migrate
 Operations to perform:
   Synchronize unmigrated apps: staticfiles, messages, refsuser
   Apply all migrations: admin, myusers, contenttypes, auth, sessions
